@@ -1,7 +1,6 @@
 package main
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
@@ -12,22 +11,19 @@ import (
 func (s *Server) handleextractassets() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("Handle extract Assets Has Been Called...")
-		getAsset := AssetID{}
-		err := json.NewDecoder(r.Body).Decode(&getAsset)
-		//handle for bad JSON provided
+		//Get Asset ID from URL
+		assettypeid := r.URL.Query().Get("assettypeid")
 
-		if err != nil {
+		//Check if Asset ID provided is null
+		if assettypeid == "" {
 			w.WriteHeader(500)
-			fmt.Fprint(w, err.Error())
-			fmt.Println("Could not read body of request into proper JSON format for getting assets.\n Please check that your data is in the correct format.")
+			fmt.Fprint(w, "Asset Type ID not properly provided in URL")
+			fmt.Println("Asset Type ID not proplery provided in URL")
 			return
 		}
 
-		//create byte array from JSON payload
-		requestByte, _ := json.Marshal(getAsset)
-
 		//post to crud service
-		req, respErr := http.Post("http://"+config.CRUDHost+":"+config.CRUDPort+"/extract", "application/json", bytes.NewBuffer(requestByte))
+		req, respErr := http.Get("http://" + config.CRUDHost + ":" + config.CRUDPort + "/extract?assettypeid=" + assettypeid)
 
 		//check for response error of 500
 		if respErr != nil {
