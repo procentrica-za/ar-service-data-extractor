@@ -39,3 +39,25 @@ type AssetRegisterResponse struct {
 type AssetList struct {
 	Assets []AssetRegisterResponse `json:"assets"`
 }
+
+type Application struct {
+	Name               string
+	Description        string
+	SerialNo           string
+	Size               string
+	Type               string
+	Class              string
+	Dimension1Val      string
+	Dimension2Val      string
+	Dimension3Val      string
+	Dimension4Val      string
+	Dimension5Val      string
+	Dimension6Val      string
+	Extent             string
+	ExtentConfidence   string
+	DeRecognitionvalue string
+}
+
+type AssetListCSV struct {
+	Assets []Application
+}
