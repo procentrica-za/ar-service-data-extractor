@@ -145,6 +145,11 @@ func (s *Server) handleextractassets() http.HandlerFunc {
 		//return to beginning  of array
 		Openfile.Seek(0, 0)
 
+		var dlterror = os.Remove(fileName)
+		if dlterror != nil {
+			fmt.Println(dlterror)
+		}
+		fmt.Println("File has been deleted -->" + fileName)
 		//Send the file
 		io.Copy(w, Openfile)
 	}
