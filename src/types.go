@@ -33,6 +33,7 @@ type AssetRegisterResponse struct {
 	Dimension6Val      string `json:"dimension6val"`
 	Extent             string `json:"extent"`
 	ExtentConfidence   string `json:"extentconfidence"`
+	TakeOnDate         string `json:"takeondate"`
 	DeRecognitionvalue string `json:"derecognitionvalue"`
 }
 
@@ -55,6 +56,7 @@ type Application struct {
 	Dimension6Val      string
 	Extent             string
 	ExtentConfidence   string
+	Takeondate         string
 	DeRecognitionvalue string
 }
 

@@ -121,10 +121,12 @@ func (s *Server) handleextractassets() http.HandlerFunc {
 			row = append(row, usance.Dimension6Val)
 			row = append(row, usance.Extent)
 			row = append(row, usance.ExtentConfidence)
+			row = append(row, usance.Takeondate)
 			row = append(row, usance.DeRecognitionvalue)
 			writer.Write(row)
 		}
 		fmt.Println("Populated CSV")
+		fmt.Println(fileName)
 
 		// flush the writer
 		writer.Flush()
@@ -153,54 +155,4 @@ func (s *Server) handleextractassets() http.HandlerFunc {
 		//Send the file
 		io.Copy(w, Openfile)
 	}
-}
-
-func populate() {
-	// read data from file
-	jsonDataFromFile, err := ioutil.ReadFile("./company.json")
-
-	if err != nil {
-		fmt.Println(err)
-	}
-
-	// Unmarshal JSON data
-	var jsonData []Application
-	err = json.Unmarshal([]byte(jsonDataFromFile), &jsonData)
-
-	if err != nil {
-		fmt.Println(err)
-	}
-
-	csvFile, err := os.Create("./data.csv")
-	fmt.Println("Created file")
-	if err != nil {
-		fmt.Println(err)
-	}
-	defer csvFile.Close()
-
-	writer := csv.NewWriter(csvFile)
-
-	for _, usance := range jsonData {
-		var row []string
-		row = append(row, usance.Name)
-		row = append(row, usance.Description)
-		row = append(row, usance.SerialNo)
-		row = append(row, usance.Size)
-		row = append(row, usance.Type)
-		row = append(row, usance.Class)
-		row = append(row, usance.Dimension1Val)
-		row = append(row, usance.Dimension2Val)
-		row = append(row, usance.Dimension3Val)
-		row = append(row, usance.Dimension4Val)
-		row = append(row, usance.Dimension5Val)
-		row = append(row, usance.Dimension6Val)
-		row = append(row, usance.Extent)
-		row = append(row, usance.ExtentConfidence)
-		row = append(row, usance.DeRecognitionvalue)
-		writer.Write(row)
-	}
-	fmt.Println("Populated CSV")
-
-	// flush the writer
-	writer.Flush()
 }
