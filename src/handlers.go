@@ -59,7 +59,7 @@ func (s *Server) handleextractassets() http.HandlerFunc {
 			return
 		}
 
-		//close the request
+		//close the request.
 		defer req.Body.Close()
 
 		//create new response struct for JSON list
