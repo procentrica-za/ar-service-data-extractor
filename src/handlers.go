@@ -123,6 +123,7 @@ func (s *Server) handleextractassets() http.HandlerFunc {
 			row = append(row, usance.ExtentConfidence)
 			row = append(row, usance.Takeondate)
 			row = append(row, usance.DeRecognitionvalue)
+			row = append(row, usance.Latitude+" , "+usance.Longitude)
 			writer.Write(row)
 		}
 		fmt.Println("Populated CSV")
