@@ -15,7 +15,7 @@ import (
 func (s *Server) handleextractassets() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("Handle extract Assets Has Been Called...")
-		//Get Asset ID from URL
+		//Get Asset ID from URL.
 		assettypeid := r.URL.Query().Get("assettypeid")
 		extractedFileName := r.URL.Query().Get("filename")
 
