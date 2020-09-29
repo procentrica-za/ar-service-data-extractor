@@ -15,7 +15,7 @@ import (
 func (s *Server) handleextractassets() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("Handle extract Assets Has Been Called...")
-		//Get Asset ID from URL
+		//Get Asset ID from URL.
 		assettypeid := r.URL.Query().Get("assettypeid")
 		extractedFileName := r.URL.Query().Get("filename")
 
@@ -123,6 +123,7 @@ func (s *Server) handleextractassets() http.HandlerFunc {
 			row = append(row, usance.ExtentConfidence)
 			row = append(row, usance.Takeondate)
 			row = append(row, usance.DeRecognitionvalue)
+			row = append(row, usance.Latitude+" , "+usance.Longitude)
 			writer.Write(row)
 		}
 		fmt.Println("Populated CSV")
